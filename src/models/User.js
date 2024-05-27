@@ -25,7 +25,7 @@ export class UserModel {
                 {
                     validator: (_, value) => {
                         if (!value) return Promise.resolve();
-                        
+
                         if (password !== value) {
                             return Promise.reject("Password is not matching");
                         } else {
@@ -47,7 +47,7 @@ export class UserModel {
             })
             .catch((e) => {
                 console.log("e :>> ", e);
-                return { success: false, error: e.message };
+                return { success: false, error: e?.response?.data?.message };
             });
     };
 
@@ -59,7 +59,7 @@ export class UserModel {
             })
             .catch((e) => {
                 console.log("e :>> ", e);
-                return { success: false, error: e.message };
+                return { success: false, error: e?.response?.data?.message };
             });
     };
 }
