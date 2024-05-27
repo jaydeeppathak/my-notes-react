@@ -39,18 +39,19 @@ const Login = () => {
                 centered: true,
             });
             setIsSubmitting(false);
+            return;
+        } else {
+            localStorage.setItem("jwt", res?.data);
+            setIsSubmitting(false);
+            Modal.success({
+                title: "Success",
+                content: "User logged in successfully",
+                centered: true,
+                afterClose: () => {
+                    navigate("/", { replace: true });
+                },
+            });
         }
-
-        localStorage.setItem("jwt", res?.data);
-        setIsSubmitting(false);
-        Modal.success({
-            title: "Success",
-            content: "User registered successfully",
-            centered: true,
-            afterClose: () => {
-                navigate("/", { replace: true });
-            },
-        });
     };
     return (
         <LoginWrapper className="d-flex w-100 justify-content-center align-items-center">
