@@ -6,7 +6,7 @@ const regex = {
     password: /[a-zA-Z0-9]+/,
 };
 
-export class LoginModel {
+export class UserModel {
     static validations = {
         email: [
             { required: true, message: "Email id is required" },
@@ -16,6 +16,24 @@ export class LoginModel {
             { required: true, message: "Password is required" },
             { pattern: regex.password, message: "Password is invalid" },
         ],
+        confirmPassword: (password) => {
+            return [
+                {
+                    required: true,
+                    message: "Please confirm your password!",
+                },
+                {
+                    validator: (_, value) => {
+                        if (password !== value) {
+                            return Promise.reject("Password is not matching");
+                        } else {
+                            return Promise.resolve();
+                        }
+                    },
+                },
+                { pattern: regex.password, message: "Password is invalid" },
+            ];
+        },
     };
 
     static checkLogin = (queryData) => {

@@ -5,11 +5,13 @@ import { EditOutlined } from "@ant-design/icons";
 import { LoginWrapper } from "./styled";
 import { UserModel } from "../../models";
 
-const Login = () => {
+const Register = () => {
     const [form] = Form.useForm();
     const validations = UserModel.validations;
     const [messageApi, contextHolder] = message.useMessage();
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const password = Form.useWatch("password", form);
 
     const onFinish = async ({ email, password }) => {
         setIsSubmitting(true);
@@ -54,7 +56,7 @@ const Login = () => {
                             }}
                             className="mb-2"
                         >
-                            Welcome back
+                            Welcome to the app
                         </Typography.Title>
                         <Typography.Title
                             level={5}
@@ -65,7 +67,7 @@ const Login = () => {
                             }}
                             className="mb-5"
                         >
-                            Welcome back! Please enter your details.
+                            Please enter your details to get onboard
                         </Typography.Title>
 
                         <Form
@@ -73,7 +75,6 @@ const Login = () => {
                             className="w-100"
                             layout="vertical"
                             onFinish={onFinish}
-                            vali
                         >
                             <Form.Item
                                 name={"email"}
@@ -93,6 +94,18 @@ const Login = () => {
                                     size="large"
                                 />
                             </Form.Item>
+                            <Form.Item
+                                name={"confirmPassword"}
+                                label="Confirm Password"
+                                rules={validations.confirmPassword(password)}
+                                dependencies={["password"]}
+                            >
+                                <Input.Password
+                                    placeholder="Enter password again"
+                                    type="password"
+                                    size="large"
+                                />
+                            </Form.Item>
                             <Button
                                 type="primary"
                                 className="w-100 mt-2"
@@ -101,7 +114,7 @@ const Login = () => {
                                 loading={isSubmitting}
                                 disabled={isSubmitting}
                             >
-                                Login
+                                Register
                             </Button>
                         </Form>
                     </Card>
@@ -111,4 +124,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
