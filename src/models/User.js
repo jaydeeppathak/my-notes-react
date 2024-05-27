@@ -43,7 +43,7 @@ export class UserModel {
         return axiosIns
             .post(`${REACT_APP_API}/users/login`, queryData)
             .then((res) => {
-                return res;
+                return res.data;
             })
             .catch((e) => {
                 console.log("e :>> ", e);
@@ -55,7 +55,7 @@ export class UserModel {
         return axiosIns
             .post(`${REACT_APP_API}/users/register`, queryData)
             .then((res) => {
-                return res;
+                return res.data;
             })
             .catch((e) => {
                 console.log("e :>> ", e);
