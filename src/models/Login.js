@@ -10,11 +10,11 @@ export class LoginModel {
     static validations = {
         email: [
             { required: true, message: "Email id is required" },
-            { regex: regex.email, message: "Email id is invalid" },
+            { pattern: regex.email, message: "Email id is invalid" },
         ],
         password: [
             { required: true, message: "Password is required" },
-            { regex: regex.password, message: "Password is invalid" },
+            { pattern: regex.password, message: "Password is invalid" },
         ],
     };
 

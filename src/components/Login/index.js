@@ -73,17 +73,14 @@ const Login = () => {
                             className="w-100"
                             layout="vertical"
                             onFinish={onFinish}
+                            vali
                         >
                             <Form.Item
                                 name={"email"}
                                 label="Email"
                                 rules={validations.email}
                             >
-                                <Input
-                                    placeholder="Enter email"
-                                    type="email"
-                                    size="large"
-                                />
+                                <Input placeholder="Enter email" size="large" />
                             </Form.Item>
                             <Form.Item
                                 name={"password"}
