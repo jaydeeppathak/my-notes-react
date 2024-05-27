@@ -1,13 +1,24 @@
 import { useState } from "react";
-import { Form, Input, Card, Button, Avatar, Typography, message } from "antd";
+import {
+    Form,
+    Input,
+    Card,
+    Button,
+    Avatar,
+    Typography,
+    message,
+    Modal,
+} from "antd";
 import BlankLayout from "../../common/layouts/BlankLayout";
 import { EditOutlined } from "@ant-design/icons";
 import { LoginWrapper } from "./styled";
 import { UserModel } from "../../models";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [form] = Form.useForm();
     const validations = UserModel.validations;
+    const navigate = useNavigate();
     const [messageApi, contextHolder] = message.useMessage();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -20,15 +31,27 @@ const Login = () => {
         console.log("queryData :>> ", queryData);
 
         const res = await UserModel.checkLogin(queryData);
+        console.log("res :>> ", res);
+
         if (!res.success) {
-            messageApi.open({
-                type: "error",
+            Modal.error({
+                title: "Oops!",
                 content: res.error || "Something went wrong",
+                centered: true,
             });
             setIsSubmitting(false);
         }
-        console.log("res :>> ", res);
+
+        await localStorage.setItem("jwt", res?.data);
         setIsSubmitting(false);
+        Modal.success({
+            title: "Success",
+            content: "User registered successfully",
+            centered: true,
+            afterClose: () => {
+                navigate("/", { replace: true });
+            },
+        });
     };
     return (
         <LoginWrapper className="d-flex w-100 justify-content-center align-items-center">
@@ -100,6 +123,11 @@ const Login = () => {
                         Login
                     </Button>
                 </Form>
+                <div className="mt-3 ">
+                    <Link to={"/register"} className="text-decoration-none">
+                        New user? Register
+                    </Link>
+                </div>
             </Card>
         </LoginWrapper>
     );

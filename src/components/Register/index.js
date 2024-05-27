@@ -1,17 +1,39 @@
 import { useState } from "react";
-import { Form, Input, Card, Button, Avatar, Typography, message } from "antd";
-import BlankLayout from "../../common/layouts/BlankLayout";
+import {
+    Form,
+    Input,
+    Card,
+    Button,
+    Avatar,
+    Typography,
+    message,
+    Modal,
+} from "antd";
+import { Link, useNavigate } from "react-router-dom";
 import { EditOutlined } from "@ant-design/icons";
+import BlankLayout from "../../common/layouts/BlankLayout";
 import { LoginWrapper } from "./styled";
 import { UserModel } from "../../models";
 
 const Register = () => {
     const [form] = Form.useForm();
+    const navigate = useNavigate();
     const validations = UserModel.validations;
     const [messageApi, contextHolder] = message.useMessage();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const password = Form.useWatch("password", form);
+
+    const redirectToLogin = () => {
+        Modal.success({
+            title: "Success",
+            content: "User registered successfully",
+            centered: true,
+            afterClose: () => {
+                navigate("/login", { replace: true });
+            },
+        });
+    };
 
     const onFinish = async ({ email, password }) => {
         setIsSubmitting(true);
@@ -31,6 +53,7 @@ const Register = () => {
         }
         console.log("res :>> ", res);
         setIsSubmitting(false);
+        redirectToLogin();
     };
     return (
         <LoginWrapper className="d-flex w-100 justify-content-center align-items-center">
@@ -114,6 +137,11 @@ const Register = () => {
                         Register
                     </Button>
                 </Form>
+                <div className="mt-3">
+                    <Link to={"/login"} className="text-decoration-none">
+                        Existing user? Login
+                    </Link>
+                </div>
             </Card>
         </LoginWrapper>
     );
