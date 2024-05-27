@@ -24,6 +24,8 @@ export class UserModel {
                 },
                 {
                     validator: (_, value) => {
+                        if (!value) return Promise.resolve();
+                        
                         if (password !== value) {
                             return Promise.reject("Password is not matching");
                         } else {
@@ -40,6 +42,18 @@ export class UserModel {
         console.log("REACT_APP_API :>> ", REACT_APP_API);
         return axiosIns
             .post(`${REACT_APP_API}/users/login`, queryData)
+            .then((res) => {
+                return res;
+            })
+            .catch((e) => {
+                console.log("e :>> ", e);
+                return { success: false, error: e.message };
+            });
+    };
+
+    static registerUser = (queryData) => {
+        return axiosIns
+            .post(`${REACT_APP_API}/users/register`, queryData)
             .then((res) => {
                 return res;
             })

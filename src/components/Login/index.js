@@ -31,82 +31,76 @@ const Login = () => {
         setIsSubmitting(false);
     };
     return (
-        <LoginWrapper>
-            <BlankLayout>
-                {contextHolder}
-                <div className="d-flex w-100 justify-content-center align-items-center">
-                    <Card className="content-card">
-                        <Avatar
-                            size="large"
-                            icon={<EditOutlined style={{ fontSize: "40px" }} />}
-                            style={{
-                                width: "80px",
-                                height: "80px",
-                                marginBottom: "30px",
-                            }}
-                        />
-                        <Typography.Title
-                            level={2}
-                            style={{
-                                margin: 0,
-                                textAlign: "left",
-                                fontWeight: "bold",
-                            }}
-                            className="mb-2"
-                        >
-                            Welcome back
-                        </Typography.Title>
-                        <Typography.Title
-                            level={5}
-                            style={{
-                                margin: 0,
-                                textAlign: "left",
-                                fontWeight: "normal",
-                            }}
-                            className="mb-5"
-                        >
-                            Welcome back! Please enter your details.
-                        </Typography.Title>
+        <LoginWrapper className="d-flex w-100 justify-content-center align-items-center">
+            <Card className="content-card">
+                <Avatar
+                    size="large"
+                    icon={<EditOutlined style={{ fontSize: "40px" }} />}
+                    style={{
+                        width: "80px",
+                        height: "80px",
+                        marginBottom: "30px",
+                    }}
+                />
+                <Typography.Title
+                    level={2}
+                    style={{
+                        margin: 0,
+                        textAlign: "left",
+                        fontWeight: "bold",
+                    }}
+                    className="mb-2"
+                >
+                    Welcome back
+                </Typography.Title>
+                <Typography.Title
+                    level={5}
+                    style={{
+                        margin: 0,
+                        textAlign: "left",
+                        fontWeight: "normal",
+                    }}
+                    className="mb-5"
+                >
+                    Welcome back! Please enter your details.
+                </Typography.Title>
 
-                        <Form
-                            form={form}
-                            className="w-100"
-                            layout="vertical"
-                            onFinish={onFinish}
-                            vali
-                        >
-                            <Form.Item
-                                name={"email"}
-                                label="Email"
-                                rules={validations.email}
-                            >
-                                <Input placeholder="Enter email" size="large" />
-                            </Form.Item>
-                            <Form.Item
-                                name={"password"}
-                                label="Password"
-                                rules={validations.password}
-                            >
-                                <Input.Password
-                                    placeholder="Enter password"
-                                    type="password"
-                                    size="large"
-                                />
-                            </Form.Item>
-                            <Button
-                                type="primary"
-                                className="w-100 mt-2"
-                                size="large"
-                                htmlType="submit"
-                                loading={isSubmitting}
-                                disabled={isSubmitting}
-                            >
-                                Login
-                            </Button>
-                        </Form>
-                    </Card>
-                </div>
-            </BlankLayout>
+                <Form
+                    form={form}
+                    className="w-100"
+                    layout="vertical"
+                    onFinish={onFinish}
+                >
+                    <Form.Item
+                        name={"email"}
+                        label="Email"
+                        rules={validations.email}
+                    >
+                        <Input placeholder="Enter email" size="large" />
+                    </Form.Item>
+                    <Form.Item
+                        name={"password"}
+                        label="Password"
+                        rules={validations.password}
+                    >
+                        <Input.Password
+                            placeholder="Enter password"
+                            type="password"
+                            size="large"
+                        />
+                    </Form.Item>
+                    <Button
+                        type="primary"
+                        className="w-100 mt-2"
+                        size="large"
+                        htmlType="submit"
+                        loading={isSubmitting}
+                        disabled={isSubmitting}
+                    >
+                        Login
+                    </Button>
+                </Form>
+            </Card>
         </LoginWrapper>
     );
 };

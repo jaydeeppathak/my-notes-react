@@ -1,13 +1,23 @@
 import { Layout } from "antd";
 import { BlankLayoutWrapper } from "./styled";
-const { Content, Footer } = Layout;
+import { useEffect } from "react";
+import { useNavigate, Outlet } from "react-router-dom";
 
 const BlankLayout = (props) => {
     const { children } = props;
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (localStorage.getItem("jwt")) {
+            navigate("/", {
+                replace: true,
+            });
+        }
+    }, []);
+
     return (
-        <BlankLayoutWrapper className="h-100 w-100">
-            <Content className="d-flex h-100 w-100">{children}</Content>
-            {/* <Footer>footer</Footer> */}
+        <BlankLayoutWrapper className="d-flex h-100 w-100">
+            <Outlet className="w-100" />
         </BlankLayoutWrapper>
     );
 };
