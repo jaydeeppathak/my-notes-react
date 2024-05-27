@@ -9,7 +9,6 @@ import {
     message,
     Modal,
 } from "antd";
-import BlankLayout from "../../common/layouts/BlankLayout";
 import { EditOutlined } from "@ant-design/icons";
 import { LoginWrapper } from "./styled";
 import { UserModel } from "../../models";
@@ -19,7 +18,6 @@ const Login = () => {
     const [form] = Form.useForm();
     const validations = UserModel.validations;
     const navigate = useNavigate();
-    const [messageApi, contextHolder] = message.useMessage();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const onFinish = async ({ email, password }) => {

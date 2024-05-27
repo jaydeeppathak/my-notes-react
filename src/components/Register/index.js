@@ -11,7 +11,6 @@ import {
 } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { EditOutlined } from "@ant-design/icons";
-import BlankLayout from "../../common/layouts/BlankLayout";
 import { LoginWrapper } from "./styled";
 import { UserModel } from "../../models";
 
@@ -19,21 +18,9 @@ const Register = () => {
     const [form] = Form.useForm();
     const navigate = useNavigate();
     const validations = UserModel.validations;
-    const [messageApi, contextHolder] = message.useMessage();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const password = Form.useWatch("password", form);
-
-    const redirectToLogin = () => {
-        Modal.success({
-            title: "Success",
-            content: "User registered successfully",
-            centered: true,
-            afterClose: () => {
-                navigate("/login", { replace: true });
-            },
-        });
-    };
 
     const onFinish = async ({ email, password }) => {
         setIsSubmitting(true);
@@ -44,16 +31,24 @@ const Register = () => {
         console.log("queryData :>> ", queryData);
 
         const res = await UserModel.registerUser(queryData);
+        console.log("res :>> ", res);
         if (!res.success) {
-            messageApi.open({
-                type: "error",
+            Modal.error({
+                title: "Oops!",
                 content: res.error || "Something went wrong",
+                centered: true,
             });
             setIsSubmitting(false);
         }
-        console.log("res :>> ", res);
         setIsSubmitting(false);
-        redirectToLogin();
+        Modal.success({
+            title: "Success",
+            content: "User registered successfully",
+            centered: true,
+            afterClose: () => {
+                navigate("/login", { replace: true });
+            },
+        });
     };
     return (
         <LoginWrapper className="d-flex w-100 justify-content-center align-items-center">

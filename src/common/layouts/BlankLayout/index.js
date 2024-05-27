@@ -1,10 +1,8 @@
-import { Layout } from "antd";
 import { BlankLayoutWrapper } from "./styled";
 import { useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 
-const BlankLayout = (props) => {
-    const { children } = props;
+const BlankLayout = () => {
     const navigate = useNavigate();
 
     useEffect(() => {

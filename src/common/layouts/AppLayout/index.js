@@ -2,9 +2,8 @@ import { Layout } from "antd";
 import { AppLayoutWrapper } from "./styled";
 import { useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
-const { Content, Footer } = Layout;
 
-const AppLayout = (props) => {
+const AppLayout = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
