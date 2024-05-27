@@ -30,6 +30,7 @@ const Login = () => {
 
         const res = await UserModel.checkLogin(queryData);
         console.log("res :>> ", res);
+        console.log("res.success :>> ", res.success);
 
         if (!res.success) {
             Modal.error({
@@ -40,7 +41,7 @@ const Login = () => {
             setIsSubmitting(false);
         }
 
-        await localStorage.setItem("jwt", res?.data);
+        localStorage.setItem("jwt", res?.data);
         setIsSubmitting(false);
         Modal.success({
             title: "Success",
