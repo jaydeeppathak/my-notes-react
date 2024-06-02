@@ -1,10 +1,48 @@
-import { Layout } from "antd";
-import { AppLayoutWrapper } from "./styled";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
+import {
+    AppstoreOutlined,
+    LogoutOutlined,
+    MailOutlined,
+    SettingOutlined,
+    UserOutlined,
+} from "@ant-design/icons";
+import { AppLayoutWrapper } from "./styled";
+
+import { Affix, Menu, Space } from "antd";
+const items = [
+    {
+        label: "Rough Note App",
+        key: "mail",
+        icon: <MailOutlined />,
+    },
+    {
+        label: "Hello Jaydeep",
+        key: "SubMenu",
+        icon: <UserOutlined style={{ fontSize: "18px" }} />,
+        style: { marginLeft: "auto" },
+        children: [
+            {
+                label: (
+                    <Space>
+                        <LogoutOutlined />
+                        Logout
+                    </Space>
+                ),
+                key: "setting:1",
+            },
+        ],
+    },
+];
 
 const AppLayout = () => {
     const navigate = useNavigate();
+
+    const [current, setCurrent] = useState("");
+    const onClick = (e) => {
+        console.log("click ", e);
+        setCurrent(e.key);
+    };
 
     useEffect(() => {
         if (!localStorage.getItem("jwt")) {
@@ -16,7 +54,17 @@ const AppLayout = () => {
 
     return (
         <AppLayoutWrapper className="d-flex h-100 w-100">
-            <Outlet className="w-100 h-100 abcd" />
+            <Affix className="mb-2">
+                <Menu
+                    className="menu"
+                    onClick={onClick}
+                    selectedKeys={[current]}
+                    mode="horizontal"
+                    items={items}
+                    // style={{ position: "sticky" }}
+                />
+            </Affix>
+            <Outlet className="w-100 h-100 mt-2" />
         </AppLayoutWrapper>
     );
 };

@@ -1,30 +1,22 @@
 import { Card, Modal, Space } from "antd";
+import NoteCard from "./NoteCard";
+import { ListWrapper } from "./styled";
+import { notesArr } from "./constants";
 
 const NotesList = () => {
     const handleClick = () => {
         Modal.success({
-            title: "This is an error message",
+            title: "Success",
             content: "some messages...some messages...",
             centered: true,
         });
     };
     return (
-        <Space direction="horizontal" size="middle" style={{ display: "flex" }}>
-            <Card
-                title="Note Title"
-                size="default"
-                onClick={handleClick}
-                style={{ textAlign: "left" }}
-            >
-                <p>Card content</p>
-            </Card>
-            <Card title="Card" size="default">
-                <p>Card content</p>
-            </Card>
-            <Card title="Card" size="default">
-                <p>Card content</p>
-            </Card>
-        </Space>
+        <ListWrapper size="middle">
+            {notesArr.map((note) => {
+                return <NoteCard note={note} handleClick={handleClick} />;
+            })}
+        </ListWrapper>
     );
 };
 
