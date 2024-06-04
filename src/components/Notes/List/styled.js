@@ -53,6 +53,8 @@ export const ListWrapper = styled.div`
         grid-row-gap: 20px;
         padding: 1em;
     }
+
+    
 `;
 
 export const NoteWrapper = styled(Card)`
@@ -97,11 +99,5 @@ export const NoteWrapper = styled(Card)`
     /* Extra extra large */
     @media (min-width: 1400px) {
         width: 24vw;
-    }
-
-    .title {
-    }
-
-    .description {
     }
 `;

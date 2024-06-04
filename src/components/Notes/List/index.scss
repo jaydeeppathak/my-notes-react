@@ -1,0 +1,36 @@
+.fab {
+    width: 70px;
+    height: 70px;
+}
+.ant-float-btn-content {
+    flex-direction: row !important;
+}
+.ant-float-btn-icon {
+    width: fit-content !important;
+}
+
+.note-modal {
+    .ant-modal-content {
+        padding: 10px 10px;
+    }
+
+    .title {
+        height: 40px;
+        border-radius: 0px !important;
+        border-bottom: 1px solid rgba(205, 173, 29, 0.3);
+        // border-radius: 14px;
+    }
+
+    .title:focus {
+        border-bottom: 1px solid rgb(205, 173, 29);
+    }
+
+    .description {
+        border-radius: 0px !important;
+        border-bottom: 1px solid rgba(205, 173, 29, 0.3);
+    }
+    .description:focus {
+        border-radius: 0px !important;
+        border-bottom: 1px solid rgb(205, 173, 29);
+    }
+}

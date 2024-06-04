@@ -62,4 +62,45 @@ export class UserModel {
                 return { success: false, error: e?.response?.data?.message };
             });
     };
+
+    static list = (queryData) => {
+        return axiosIns
+            .get(`${REACT_APP_API}/notes`, queryData)
+            .then((res) => {
+                return res.data;
+            })
+            .catch((e) => {
+                console.log("e :>> ", e);
+                return { success: false, error: e?.response?.data?.message };
+            });
+    };
+    static addNote = (queryData) => {
+        return axiosIns
+            .post(`${REACT_APP_API}/notes`, queryData)
+            .then((res) => {
+                return res.data;
+            })
+            .catch((e) => {
+                console.log("e :>> ", e);
+                return {
+                    success: false,
+                    error: e?.response?.data?.message,
+                };
+            });
+    };
+
+    static updateNote = (id, queryData) => {
+        return axiosIns
+            .put(`${REACT_APP_API}/notes/${id}`, queryData)
+            .then((res) => {
+                return res.data;
+            })
+            .catch((e) => {
+                console.log("e :>> ", e);
+                return {
+                    success: false,
+                    error: e?.response?.data?.message,
+                };
+            });
+    };
 }
