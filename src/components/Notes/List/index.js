@@ -74,6 +74,7 @@ const NotesList = () => {
             return;
         }
         setIsLoading(false);
+        setNotesArr(res?.data);
     };
 
     const handleSubmit = async (values) => {
