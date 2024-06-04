@@ -2,12 +2,17 @@ import { axiosIns } from "../axios";
 import { REACT_APP_API } from "../constants";
 
 const regex = {
+    name: /[a-zA-Z0-9]+/,
     email: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
     password: /[a-zA-Z0-9]+/,
 };
 
 export class UserModel {
     static validations = {
+        name: [
+            { required: true, message: "Name is required" },
+            { pattern: regex.name, message: "Name is invalid" },
+        ],
         email: [
             { required: true, message: "Email id is required" },
             { pattern: regex.email, message: "Email id is invalid" },

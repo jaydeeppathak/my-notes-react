@@ -22,9 +22,10 @@ const Register = () => {
 
     const password = Form.useWatch("password", form);
 
-    const onFinish = async ({ email, password }) => {
+    const onFinish = async ({ name, email, password }) => {
         setIsSubmitting(true);
         const queryData = {
+            name,
             email,
             password,
         };
@@ -38,7 +39,9 @@ const Register = () => {
                 centered: true,
             });
             setIsSubmitting(false);
+            return;
         }
+
         setIsSubmitting(false);
         Modal.success({
             title: "Success",
@@ -90,6 +93,13 @@ const Register = () => {
                     layout="vertical"
                     onFinish={onFinish}
                 >
+                    <Form.Item
+                        name={"name"}
+                        label="Name"
+                        rules={validations.name}
+                    >
+                        <Input placeholder="Enter name" size="large" />
+                    </Form.Item>
                     <Form.Item
                         name={"email"}
                         label="Email"
