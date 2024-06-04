@@ -1,3 +1,4 @@
+export const loaderNoteArr = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 export const notesArr = [
     {
         _id: "b2ae7cc6-0977-432a-895c-1fbd37bf6eb7",

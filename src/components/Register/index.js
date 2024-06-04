@@ -28,7 +28,6 @@ const Register = () => {
             email,
             password,
         };
-        console.log("queryData :>> ", queryData);
 
         const res = await UserModel.registerUser(queryData);
         console.log("res :>> ", res);

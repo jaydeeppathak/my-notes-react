@@ -39,14 +39,12 @@ export class UserModel {
     };
 
     static checkLogin = (queryData) => {
-        console.log("REACT_APP_API :>> ", REACT_APP_API);
         return axiosIns
             .post(`${REACT_APP_API}/users/login`, queryData)
             .then((res) => {
                 return res.data;
             })
             .catch((e) => {
-                console.log("e :>> ", e);
                 return { success: false, error: e?.response?.data?.message };
             });
     };
@@ -58,7 +56,6 @@ export class UserModel {
                 return res.data;
             })
             .catch((e) => {
-                console.log("e :>> ", e);
                 return { success: false, error: e?.response?.data?.message };
             });
     };
@@ -70,7 +67,6 @@ export class UserModel {
                 return res.data;
             })
             .catch((e) => {
-                console.log("e :>> ", e);
                 return { success: false, error: e?.response?.data?.message };
             });
     };
@@ -81,7 +77,6 @@ export class UserModel {
                 return res.data;
             })
             .catch((e) => {
-                console.log("e :>> ", e);
                 return {
                     success: false,
                     error: e?.response?.data?.message,
@@ -96,7 +91,6 @@ export class UserModel {
                 return res.data;
             })
             .catch((e) => {
-                console.log("e :>> ", e);
                 return {
                     success: false,
                     error: e?.response?.data?.message,

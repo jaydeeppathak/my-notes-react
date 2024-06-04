@@ -26,11 +26,9 @@ const Login = () => {
             email,
             password,
         };
-        console.log("queryData :>> ", queryData);
 
         const res = await UserModel.checkLogin(queryData);
         console.log("res :>> ", res);
-        console.log("res.success :>> ", res.success);
 
         if (!res.success) {
             Modal.error({

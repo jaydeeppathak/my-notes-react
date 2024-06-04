@@ -1,20 +1,37 @@
 import { useEffect, useRef, useState } from "react";
 import isEmpty from "lodash/isEmpty";
-import { Card, FloatButton, Form, Input, Modal, Result, Space } from "antd";
+import {
+    Button,
+    Card,
+    FloatButton,
+    Form,
+    Input,
+    Modal,
+    Result,
+    Skeleton,
+    Space,
+} from "antd";
 import { PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { UserModel } from "../../../models";
-import { notesArr as dummyArr } from "./constants";
+import { notesArr as dummyArr, loaderNoteArr } from "./constants";
 import NoteCard from "./NoteCard";
-import { ListWrapper } from "./styled";
+import { ListWrapper, NoteWrapper } from "./styled";
 import "./index.scss";
 
-const NotFound = () => {
+const NotFound = ({ handleAddNoteClick }) => {
     return (
         <Result
-            status="404"
-            title="404"
-            subTitle="Sorry, the page you visited does not exist."
-            // extra={<Button type="primary">Back Home</Button>}
+            title="Oopps"
+            subTitle="No note found !"
+            extra={
+                <Button
+                    type="primary"
+                    key="console"
+                    onClick={handleAddNoteClick}
+                >
+                    Add note
+                </Button>
+            }
         />
     );
 };
@@ -28,7 +45,7 @@ const NotesList = () => {
     const [form] = Form.useForm();
     const titleRef = useRef();
 
-    const handleClick = (note = {}) => {
+    const handleAddNoteClick = (note = {}) => {
         setShowNotesModal(!showNotesModal);
         setSelectedNote(note);
     };
@@ -81,7 +98,6 @@ const NotesList = () => {
         setIsSubmitting(true);
 
         let res;
-        console.log("values :>> ", values);
         if (values._id) {
             res = await UserModel.updateNote(values._id, values);
         } else {
@@ -99,7 +115,22 @@ const NotesList = () => {
             return;
         }
         setIsSubmitting(false);
+        showNotesModal(false);
+        fetchNotes();
     };
+    if (isLoading) {
+        return (
+            <ListWrapper size="middle">
+                {loaderNoteArr.map((_note, i) => {
+                    return (
+                        <NoteWrapper key={i} size="default">
+                            <Skeleton active />
+                        </NoteWrapper>
+                    );
+                })}
+            </ListWrapper>
+        );
+    }
 
     return (
         <>
@@ -109,16 +140,18 @@ const NotesList = () => {
                         return (
                             <NoteCard
                                 note={note}
-                                handleClick={() => handleClick(note)}
+                                handleAddNoteClick={() =>
+                                    handleAddNoteClick(note)
+                                }
                             />
                         );
                     })}
                 </ListWrapper>
             ) : (
-                <NotFound />
+                <NotFound handleAddNoteClick={handleAddNoteClick} />
             )}
             <FloatButton
-                onClick={() => handleClick()}
+                onClick={() => handleAddNoteClick()}
                 type="primary"
                 icon={<PlusOutlined style={{ fontSize: "35px" }} />}
                 className="fab"
@@ -137,7 +170,7 @@ const NotesList = () => {
                 cancelButtonProps={{
                     disabled: isSubmitting,
                 }}
-                onCancel={handleClick}
+                onCancel={handleAddNoteClick}
                 onOk={() => form.submit()}
             >
                 <Form form={form} className="" onFinish={handleSubmit}>

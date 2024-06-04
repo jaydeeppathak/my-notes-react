@@ -3,7 +3,7 @@ import { NoteWrapper } from "./styled";
 
 const NoteCard = (props) => {
     const {
-        handleClick,
+        handleAddNoteClick,
         note: { _id, title, description },
     } = props;
     return (
@@ -11,7 +11,7 @@ const NoteCard = (props) => {
             key={_id}
             title={title}
             size="default"
-            onClick={handleClick}
+            onClick={handleAddNoteClick}
         >
             <p className="description">{description}</p>
         </NoteWrapper>
