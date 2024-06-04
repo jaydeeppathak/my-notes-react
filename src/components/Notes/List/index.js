@@ -115,7 +115,7 @@ const NotesList = () => {
             return;
         }
         setIsSubmitting(false);
-        showNotesModal(false);
+        setShowNotesModal(false);
         fetchNotes();
     };
     if (isLoading) {

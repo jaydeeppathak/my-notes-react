@@ -60,6 +60,17 @@ export class UserModel {
             });
     };
 
+    static currentUser = (queryData) => {
+        return axiosIns
+            .get(`${REACT_APP_API}/users/current`, queryData)
+            .then((res) => {
+                return res.data;
+            })
+            .catch((e) => {
+                return { success: false, error: e?.response?.data?.message };
+            });
+    };
+
     static list = (queryData) => {
         return axiosIns
             .get(`${REACT_APP_API}/notes`, queryData)
