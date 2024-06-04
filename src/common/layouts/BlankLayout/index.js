@@ -1,9 +1,10 @@
-import { BlankLayoutWrapper } from "./styled";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
+import { BlankLayoutWrapper } from "./styled";
 
 const BlankLayout = () => {
     const navigate = useNavigate();
+    const [jwtCheck, setJWTCheck] = useState(undefined);
 
     useEffect(() => {
         if (localStorage.getItem("jwt")) {
@@ -11,11 +12,12 @@ const BlankLayout = () => {
                 replace: true,
             });
         }
+        setJWTCheck(true);
     }, []);
 
     return (
         <BlankLayoutWrapper className="d-flex h-100 w-100">
-            <Outlet className="w-100" />
+            {jwtCheck && <Outlet className="w-100" />}
         </BlankLayoutWrapper>
     );
 };

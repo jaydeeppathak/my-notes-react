@@ -10,7 +10,7 @@ import {
 import { AppLayoutWrapper } from "./styled";
 
 import { Affix, Menu, Space } from "antd";
-const items = [
+const items = ({ handleLogout }) => [
     {
         label: "Rough Note App",
         key: "mail",
@@ -24,7 +24,7 @@ const items = [
         children: [
             {
                 label: (
-                    <Space>
+                    <Space onClick={handleLogout}>
                         <LogoutOutlined />
                         Logout
                     </Space>
@@ -39,8 +39,9 @@ const AppLayout = () => {
     const navigate = useNavigate();
 
     const [current, setCurrent] = useState("");
+    const [jwtCheck, setJWTCheck] = useState(undefined);
+
     const onClick = (e) => {
-        console.log("click ", e);
         setCurrent(e.key);
     };
 
@@ -50,8 +51,15 @@ const AppLayout = () => {
                 replace: true,
             });
         }
+        setJWTCheck(true);
     }, []);
 
+    const handleLogout = () => {
+        localStorage.removeItem("jwt");
+        navigate("/login", {
+            replace: true,
+        });
+    };
     return (
         <AppLayoutWrapper className="d-flex h-100 w-100">
             <Affix className="mb-2">
@@ -60,11 +68,11 @@ const AppLayout = () => {
                     onClick={onClick}
                     selectedKeys={[current]}
                     mode="horizontal"
-                    items={items}
+                    items={items({ handleLogout })}
                     // style={{ position: "sticky" }}
                 />
             </Affix>
-            <Outlet className="w-100 h-100 mt-2" />
+            {jwtCheck && <Outlet className="w-100 h-100 mt-2" />}
         </AppLayoutWrapper>
     );
 };
