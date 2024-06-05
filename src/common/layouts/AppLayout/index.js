@@ -54,6 +54,7 @@ const AppLayout = () => {
             navigate("/login", {
                 replace: true,
             });
+            return;
         }
 
         fetchCurrentUser();
